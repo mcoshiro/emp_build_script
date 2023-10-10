@@ -47,7 +47,7 @@ ipbb add git ssh://git@gitlab.cern.ch:7999/dth_p1-v2/slinkrocket.git -b v03.10
 ipbb add git https://gitlab.cern.ch/gbt-fpga/gbt-fpga.git -b gbt_fpga_6_1_0
 ipbb add git https://gitlab.cern.ch/gbt-fpga/lpgbt-fpga.git -b v.2.1
 ipbb add git https://:@gitlab.cern.ch:8443/gbtsc-fpga-support/gbt-sc.git -b gbt_sc_4_1
-ipbb add git https://github.com/mcoshiro/firmware-hls.git -b emp_timing
+ipbb add git https://github.com/mcoshiro/firmware-hls.git -b emp_updates
 
 #fix which address tables are referenced
 cd src/CM_FPGA_FW/kernel/address_tables
