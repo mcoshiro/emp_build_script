@@ -43,13 +43,15 @@ process.tt = cms.Sequence (  process.TrackerDTCProducer
 
 
 from L1Trigger.TrackFindingTracklet.Customize_cff import *
-reducedConfig( process )
 
 barrel_config = False
 if (barrel_config):
+  fwConfig(process)
   process.l1tTTTracksFromTrackletEmulation.memoryModulesFile = 'L1Trigger/TrackFindingTracklet/data/cmbarrel_memorymodules.dat'
   process.l1tTTTracksFromTrackletEmulation.processingModulesFile = 'L1Trigger/TrackFindingTracklet/data/cmbarrel_processingmodules.dat'
   process.l1tTTTracksFromTrackletEmulation.wiresFile = 'L1Trigger/TrackFindingTracklet/data/cmbarrel_wires.dat'
+else:
+  reducedConfig( process )
 
 process.demo = cms.Path( process.tt + process.TrackerTFPDemonstrator )
 process.schedule = cms.Schedule( process.demo )
