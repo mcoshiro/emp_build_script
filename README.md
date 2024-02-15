@@ -1,1 +1,1 @@
-Repository to contain a bash script for building EMP firmware because, hey, if this frakenstein project already requires 11 repos, what's one more.
+Repository to hold scripts for building combined track finder firmware as well as for generating emulation that can be used to compare with the firmware output.
