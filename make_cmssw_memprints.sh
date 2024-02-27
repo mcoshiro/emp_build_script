@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
+#script to automatically set up CMSSW to obtain emulated track finder output
 
-#script to automatically set up CMSSW to obtain emulated 
-
-#setup CMSSW and L1TK software
 source /cvmfs/cms.cern.ch/cmsset_default.sh
 cmsrel CMSSW_13_3_0_pre2
 cd CMSSW_13_3_0_pre2/src/
@@ -40,10 +38,18 @@ cp firmware-hls/emData/project_generation_scripts/cmbarrel_processingmodules.dat
 cp firmware-hls/emData/project_generation_scripts/cmbarrel_wires.dat CMSSW_13_3_0_pre2/src/L1Trigger/TrackFindingTracklet/data/
 rm -rf firmware-hls
 
+#changes for barrel project
+if [ "$1" == "barrel" ];
+then
+  rm CMSSW_13_3_0_pre2/src/L1Trigger/TrackFindingTracklet/plugins/L1FPGATrackProducer.cc
+  cp L1FPGATrackProducer_barrel.cc CMSSW_13_3_0_pre2/src/L1Trigger/TrackFindingTracklet/plugins/L1FPGATrackProducer.cc
+  sed -i 's/barrel_config = False/barrel_config = True/g' CMSSW_13_3_0_pre2/src/L1Trigger/TrackFindingTracklet/test/demonstrator2_cfg.py
+fi
+
 #compile
 cd CMSSW_13_3_0_pre2/src/
 scram b -j8
 
-#then run (defaults to reduced project, change bool flag to run barrel project)
+#then run with
 cd L1Trigger/TrackFindingTracklet/test/
 cmsRun demonstrator2_cfg.py
